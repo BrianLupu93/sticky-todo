@@ -1,0 +1,76 @@
+* {
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+
+button {
+  background-color: transparent;
+  border: none;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  padding-left: 20px;
+}
+
+body ::-webkit-scrollbar {
+  background-color: transparent;
+}
+
+.sticky-container {
+  display: flex;
+  width: 450px;
+  height: 280px;
+  margin: 10px;
+  background-image: url("../../images/stickyNote.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+
+.sticky-content {
+  width: 410px;
+  height: 220px;
+  background-color: transparent;
+  margin: 20px;
+}
+
+.sticky-content .header {
+  display: flex;
+  justify-content: center;
+  margin: 20px 50px 10px 50px;
+  color: green;
+}
+
+.sticky-content .body {
+  margin: 10px 10px 0px 10px;
+  height: 65px;
+  overflow-y: auto;
+  color: black;
+  text-align: center;
+  font-style: italic;
+}
+
+.sticky-content .footer {
+  display: flex;
+  justify-content: space-between;
+  align-content: flex-end;
+  margin: 10px 20px;
+}
+.sticky-content .footer .date {
+  color: blue;
+}
+
+.edit-btn {
+  color: rgb(200, 27, 213);
+}
+
+.edit-btn:hover {
+  color: white;
+}
+
+.delete-btn {
+  color: red;
+}
+.delete-btn:hover {
+  color: white;
+}
