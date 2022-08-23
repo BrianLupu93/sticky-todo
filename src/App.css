@@ -9,7 +9,52 @@ body {
   justify-content: center;
 }
 
+.App {
+  width: 500px;
+  height: 800px;
+  border: 0.5px solid white;
+  border-radius: 50px;
+  margin-top: 80px;
+}
+
+.app-body {
+  display: flex;
+  justify-content: center;
+}
+
 .app-title {
   color: rgb(229, 208, 53);
   text-align: center;
+  font-size: 45px;
+}
+.app-subtitle {
+  color: white;
+  text-align: center;
+  margin-top: -15px;
+}
+.app-subtitle2 {
+  color: white;
+  text-align: center;
+  font-style: italic;
+  font-weight: lighter;
+  margin-top: -10px;
+}
+
+.app-footer {
+  display: flex;
+  justify-content: center;
+  margin-top: 60px;
+}
+.to-stickies-btn {
+  color: white;
+  border: 1px solid white;
+  border-radius: 10px;
+  font-size: 20px;
+  width: 200px;
+  height: 35px;
+  text-align: center;
+}
+.to-stickies-btn:hover {
+  color: green;
+  border-color: green;
 }
