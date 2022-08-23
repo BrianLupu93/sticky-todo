@@ -1,6 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useForm } from "react-hook-form";
 
-const InputForm = ({ day, month, year }) => {
+const InputForm = ({ day, month, year, setStickies }) => {
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm();
+
+  const onSubmit = (data) => {
+    setStickies(data);
+    reset();
+  };
+
   if (day.toString().length < 2) {
     day = "0" + day;
   }
@@ -10,12 +23,17 @@ const InputForm = ({ day, month, year }) => {
 
   return (
     <>
-      <form action="submit" className="sticky-form">
+      <form
+        action="submit"
+        className="sticky-form"
+        onSubmit={handleSubmit(onSubmit)}
+      >
         <div className="sticky-container">
           <div className="sticky-content">
             <div className="header">
               <h1 className="title">
                 <input
+                  {...register("title", { required: true })}
                   className="input-title "
                   type="text"
                   placeholder="Sticker Title"
@@ -25,6 +43,7 @@ const InputForm = ({ day, month, year }) => {
             <div className="body">
               <p>
                 <textarea
+                  {...register("body", { required: true })}
                   className="input-body"
                   type="text"
                   placeholder="Sticker text holder"
@@ -34,15 +53,29 @@ const InputForm = ({ day, month, year }) => {
             <div className="footer">
               <div className="input-date">
                 <div className="date">
-                  <input className="input-date day" placeholder={day} />
+                  <input
+                    {...register("day")}
+                    className="input-date day"
+                    placeholder={day}
+                  />
                   /
-                  <input className="input-date month" placeholder={month} />
+                  <input
+                    {...register("month")}
+                    className="input-date month"
+                    placeholder={month}
+                  />
                   /
-                  <input className="input-date year" placeholder={year} />
+                  <input
+                    {...register("year")}
+                    className="input-date year"
+                    placeholder={year}
+                  />
                 </div>
               </div>
               <div className="sticky-btns">
-                <button className="submit-btn">Submit Sticky</button>
+                <button type="submit" className="submit-btn">
+                  Submit Sticky
+                </button>
               </div>
             </div>
           </div>
