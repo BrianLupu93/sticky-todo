@@ -4,17 +4,21 @@
 }
 
 body {
-  background-color: rgb(53, 53, 53);
   display: flex;
   justify-content: center;
 }
 
 .App {
+  background-color: rgb(53, 53, 53);
   width: 500px;
   height: 800px;
   border: 0.5px solid white;
   border-radius: 50px;
   margin-top: 80px;
+}
+
+.app-header {
+  margin-top: 50px;
 }
 
 .app-body {
