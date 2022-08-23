@@ -11,11 +11,16 @@ body ::-webkit-scrollbar {
   background-color: transparent;
 }
 
+textarea {
+  resize: none;
+}
+
 .sticky-container {
   display: flex;
   width: 450px;
   height: 280px;
   margin: 10px;
+  margin-top: 80px;
   background-image: url("../../images/stickyNote.png");
   background-repeat: no-repeat;
   background-position: center;
@@ -49,6 +54,9 @@ body ::-webkit-scrollbar {
 .input-title:focus {
   outline: none;
 }
+.input-title:focus::placeholder {
+  color: transparent;
+}
 
 .input-title::placeholder {
   font-size: 32px;
@@ -66,12 +74,8 @@ body ::-webkit-scrollbar {
   font-style: italic;
 }
 
-textarea {
-  resize: none;
-}
-
 .input-body {
-  height: 50px;
+  height: 40px;
   width: 350px;
   background: transparent;
   border: none;
@@ -83,6 +87,11 @@ textarea {
 .input-body:focus {
   outline: none;
 }
+
+.input-body:focus::placeholder {
+  color: transparent;
+}
+
 .input-body::placeholder {
   text-align: center;
 }
@@ -95,6 +104,7 @@ textarea {
 }
 .sticky-content .footer .date {
   color: green;
+  display: flex;
 }
 
 .edit-btn {
@@ -114,9 +124,31 @@ textarea {
   color: white;
 }
 .submit-btn {
-  color: green;
+  color: red;
   font-weight: bold;
 }
 .submit-btn:hover {
   color: white;
+}
+
+.input-date {
+  width: 20px;
+  font-size: 16px;
+  background: transparent;
+  border: none;
+  color: green;
+}
+.input-date::placeholder {
+  color: green;
+}
+
+.input-date .year {
+  width: 40px;
+}
+
+.input-date:focus {
+  outline: none;
+}
+.input-date:focus::placeholder {
+  color: transparent;
 }
