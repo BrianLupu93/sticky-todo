@@ -1,7 +1,13 @@
 import React from "react";
-import "./InputForm.css";
 
-const InputForm = () => {
+const InputForm = ({ day, month, year }) => {
+  if (day.toString().length < 2) {
+    day = "0" + day;
+  }
+  if (month.toString().length < 2) {
+    month = "0" + month;
+  }
+
   return (
     <>
       <form action="submit" className="sticky-form">
@@ -26,7 +32,15 @@ const InputForm = () => {
               </p>
             </div>
             <div className="footer">
-              <div className="date">dd-mm-yyyy</div>
+              <div className="input-date">
+                <div className="date">
+                  <input className="input-date day" placeholder={day} />
+                  /
+                  <input className="input-date month" placeholder={month} />
+                  /
+                  <input className="input-date year" placeholder={year} />
+                </div>
+              </div>
               <div className="sticky-btns">
                 <button className="submit-btn">Submit Sticky</button>
               </div>
