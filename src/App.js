@@ -1,33 +1,21 @@
 import "./App.css";
-import Sticky from "./components/sticky/Sticky.jsx";
+import InputForm from "./components/input-form/InputForm";
 import { useState } from "react";
+import Sticky from "./components/sticky/Sticky";
 
 function App() {
-  const [stickers, setStickers] = useState([
-    { title: "brian", body: "programare la doctor", date: "22-22-22" },
-  ]);
+  const [stickers, setStickers] = useState([]);
 
-  const newSticky = (title, body, date) => {
-    return setStickers({
-      title,
-      body,
-      date,
-    });
-  };
-
-  console.log(stickers);
   return (
     <div className="App">
-      {stickers.map((sticker, i) => {
-        return (
-          <Sticky
-            key={i}
-            title={sticker.title}
-            body={sticker.body}
-            date={sticker.date}
-          />
-        );
-      })}
+      <h1 className="app-title">My sticky Notes</h1>
+
+      <InputForm />
+      <Sticky
+        title={"Sticker Title"}
+        body={"This is the body"}
+        date={"22-03-2012"}
+      />
     </div>
   );
 }
