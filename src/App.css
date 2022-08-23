@@ -1,3 +1,15 @@
+* {
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+
 body {
   background-color: rgb(53, 53, 53);
+  display: flex;
+  justify-content: center;
+}
+
+.app-title {
+  color: rgb(229, 208, 53);
+  text-align: center;
 }
