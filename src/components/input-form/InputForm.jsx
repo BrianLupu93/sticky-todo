@@ -2,24 +2,28 @@ import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 
 const InputForm = ({ day, month, year, setStickies }) => {
+  day = day.toString();
+  month = month.toString();
+  year = year.toString();
+
+  if (day.length < 2) {
+    day = "0" + day;
+  }
+  if (month.length < 2) {
+    month = "0" + month;
+  }
+
   const {
     register,
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm();
+  } = useForm({ defaultValues: { title: "", body: "", day, month, year } });
 
   const onSubmit = (data) => {
     setStickies(data);
     reset();
   };
-
-  if (day.toString().length < 2) {
-    day = "0" + day;
-  }
-  if (month.toString().length < 2) {
-    month = "0" + month;
-  }
 
   return (
     <>
