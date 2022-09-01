@@ -1,5 +1,4 @@
 import React from "react";
-import { useState } from "react";
 import Stiky from "../sticky/Sticky";
 import "./StickiesBoard.css";
 

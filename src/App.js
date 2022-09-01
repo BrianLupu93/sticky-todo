@@ -4,7 +4,6 @@ import { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./components/home/Home";
 import StickiesBoard from "./components/stickies-board/StickiesBoard";
-import { set } from "react-hook-form";
 
 function App() {
   // ----------------- GLOBAL STATE ----------------------------------
@@ -53,12 +52,21 @@ function App() {
       return monthItem;
     });
     setMonths(newMonths);
-    console.log(months);
   };
+
+  const sortStickies = (stickiesList) => {
+    const newStickiesList = stickiesList.sort(
+      (a, b) => parseInt(a.month) - parseInt(b.month)
+    );
+
+    setStickies(newStickiesList);
+  };
+
   // ----------------- SIDE EFFECTS ----------------------------------
 
   useEffect(() => {
     if (stickies) {
+      sortStickies(stickies);
       checkMonthName(stickies[stickies.length - 1]);
     }
   }, [stickies]);
