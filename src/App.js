@@ -35,7 +35,7 @@ function App() {
   // ----------------- DEFAULF STICKY DATA ----------------------------------
   const today = new Date();
   const day = today.getDate();
-  const month = today.getMonth();
+  const month = today.getMonth() + 1;
   const year = today.getFullYear();
 
   // ----------------- FUNCTIONS ----------------------------------
@@ -56,7 +56,9 @@ function App() {
 
   const sortStickies = (stickiesList) => {
     const newStickiesList = stickiesList.sort(
-      (a, b) => parseInt(a.month) - parseInt(b.month)
+      (a, b) =>
+        parseInt(a.month) - parseInt(b.month) ||
+        parseInt(a.day) - parseInt(b.day)
     );
 
     setStickies(newStickiesList);
@@ -69,6 +71,7 @@ function App() {
       sortStickies(stickies);
       checkMonthName(stickies[stickies.length - 1]);
     }
+    console.log(stickies);
   }, [stickies]);
 
   return (
