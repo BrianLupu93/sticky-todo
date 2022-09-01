@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 const Home = ({ day, month, year, setStickies }) => {
   const navigate = useNavigate();
+
   return (
     <>
       <div className="App">
