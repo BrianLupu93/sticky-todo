@@ -63,8 +63,6 @@ function App() {
     }
   }, [stickies]);
 
-  console.log(months);
-
   return (
     <BrowserRouter>
       <Routes>
