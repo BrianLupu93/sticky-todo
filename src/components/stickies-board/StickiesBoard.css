@@ -1,3 +1,19 @@
 body {
   background-color: rgb(53, 53, 53);
 }
+
+.stickies-board {
+}
+
+.month-container {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+}
+
+.month-title {
+  color: white;
+  text-align: center;
+  padding-bottom: 10px;
+  border-bottom: 0.5px solid green;
+}

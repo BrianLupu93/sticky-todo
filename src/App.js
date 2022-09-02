@@ -10,11 +10,25 @@ function App() {
 
   const [stickies, setStickies] = useState([
     {
-      title: "Test",
-      body: "body body body",
-      day: "03",
+      title: "gwergewr",
+      body: "wefewfwf",
+      day: "20",
       month: "08",
-      year: "2022",
+      year: "2021",
+    },
+    {
+      title: "gwergewr",
+      body: "wefewfwf",
+      day: "20",
+      month: "08",
+      year: "2021",
+    },
+    {
+      title: "gwergewr",
+      body: "wefewfwf",
+      day: "20",
+      month: "08",
+      year: "2021",
     },
   ]);
 
@@ -32,6 +46,7 @@ function App() {
     { name: "November", number: "11", used: false },
     { name: "December", number: "12", used: false },
   ]);
+
   // ----------------- DEFAULF STICKY DATA ----------------------------------
   const today = new Date();
   const day = today.getDate();
@@ -49,14 +64,17 @@ function App() {
       if (monthItem.number === stickyMonth && !monthItem.used) {
         return { ...monthItem, used: !monthItem.used };
       }
+
       return monthItem;
     });
     setMonths(newMonths);
+    console.log(newMonths);
   };
 
   const sortStickies = (stickiesList) => {
     const newStickiesList = stickiesList.sort(
       (a, b) =>
+        parseInt(a.year) - parseInt(b.year) ||
         parseInt(a.month) - parseInt(b.month) ||
         parseInt(a.day) - parseInt(b.day)
     );
@@ -67,11 +85,10 @@ function App() {
   // ----------------- SIDE EFFECTS ----------------------------------
 
   useEffect(() => {
-    if (stickies) {
-      sortStickies(stickies);
+    if (stickies.length > 0) {
       checkMonthName(stickies[stickies.length - 1]);
+      sortStickies(stickies);
     }
-    console.log(stickies);
   }, [stickies]);
 
   return (
@@ -85,7 +102,7 @@ function App() {
         />
         <Route
           path="/stickies-board"
-          element={<StickiesBoard stickies={stickies} />}
+          element={<StickiesBoard stickies={stickies} months={months} />}
         />
       </Routes>
     </BrowserRouter>
