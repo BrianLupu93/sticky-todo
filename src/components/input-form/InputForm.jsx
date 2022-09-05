@@ -1,7 +1,7 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 
-const InputForm = ({ day, month, year, setStickies }) => {
+const InputForm = ({ day, month, year, setStickies, stickies }) => {
   day = day.toString();
   month = month.toString();
   year = year.toString();
@@ -18,10 +18,9 @@ const InputForm = ({ day, month, year, setStickies }) => {
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm({ defaultValues: { title: "", body: "", day, month, year } });
+  } = useForm({ defaultValues: { day, month, year } });
 
   const onSubmit = (data) => {
-    setStickies(data);
     reset();
   };
 

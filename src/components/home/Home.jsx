@@ -3,7 +3,7 @@ import InputForm from "../input-form/InputForm";
 import "../sticky/Sticky.css";
 import { useNavigate } from "react-router-dom";
 
-const Home = ({ day, month, year, setStickies }) => {
+const Home = ({ day, month, year, setStickies, stickies }) => {
   const navigate = useNavigate();
 
   return (
@@ -15,11 +15,13 @@ const Home = ({ day, month, year, setStickies }) => {
           <h4 className="app-subtitle2">YOUR DAILY TASKS</h4>
         </div>
         <div className="app-body">
+          r
           <InputForm
             day={day}
             month={month}
             year={year}
             setStickies={setStickies}
+            stickies={stickies}
           />
         </div>
         <div className="app-footer">

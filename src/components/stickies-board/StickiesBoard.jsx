@@ -8,16 +8,13 @@ const StickiesBoard = ({ stickies, months }) => {
       {months.map((monthItem, i) => {
         if (monthItem.used) {
           return (
-            <div>
-              <h1 className="month-title" key={i}>
-                {monthItem.name}
-              </h1>
+            <div key={i}>
+              <h1 className="month-title">{monthItem.name}</h1>
               <div className="month-container" key={i}>
                 {stickies.map((sticky, i) => {
                   if (sticky.month === monthItem.number) {
                     return (
                       <Stiky
-                        id={i}
                         key={i}
                         title={sticky.title}
                         body={sticky.body}

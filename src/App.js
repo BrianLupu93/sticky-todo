@@ -8,43 +8,21 @@ import StickiesBoard from "./components/stickies-board/StickiesBoard";
 function App() {
   // ----------------- GLOBAL STATE ----------------------------------
 
-  const [stickies, setStickies] = useState([
-    {
-      title: "gwergewr",
-      body: "wefewfwf",
-      day: "20",
-      month: "08",
-      year: "2021",
-    },
-    {
-      title: "gwergewr",
-      body: "wefewfwf",
-      day: "20",
-      month: "08",
-      year: "2021",
-    },
-    {
-      title: "gwergewr",
-      body: "wefewfwf",
-      day: "20",
-      month: "08",
-      year: "2021",
-    },
-  ]);
+  const [stickies, setStickies] = useState([]);
 
   const [months, setMonths] = useState([
-    { name: "January", number: "01", used: false },
-    { name: "February", number: "02", used: false },
-    { name: "March", number: "03", used: false },
-    { name: "April", number: "04", used: false },
-    { name: "May", number: "05", used: false },
-    { name: "June", number: "06", used: false },
-    { name: "July", number: "07", used: false },
-    { name: "August", number: "08", used: false },
-    { name: "September", number: "09", used: false },
-    { name: "October", number: "10", used: false },
-    { name: "November", number: "11", used: false },
-    { name: "December", number: "12", used: false },
+    { name: "January", number: "01", used: false, count: 0 },
+    { name: "February", number: "02", used: false, count: 0 },
+    { name: "March", number: "03", used: false, count: 0 },
+    { name: "April", number: "04", used: false, count: 0 },
+    { name: "May", number: "05", used: false, count: 0 },
+    { name: "June", number: "06", used: false, count: 0 },
+    { name: "July", number: "07", used: false, count: 0 },
+    { name: "August", number: "08", used: false, count: 0 },
+    { name: "September", number: "09", used: false, count: 0 },
+    { name: "October", number: "10", used: false, count: 0 },
+    { name: "November", number: "11", used: false, count: 0 },
+    { name: "December", number: "12", used: false, count: 0 },
   ]);
 
   // ----------------- DEFAULF STICKY DATA ----------------------------------
@@ -62,13 +40,19 @@ function App() {
 
     const newMonths = months.map((monthItem) => {
       if (monthItem.number === stickyMonth && !monthItem.used) {
-        return { ...monthItem, used: !monthItem.used };
+        return {
+          ...monthItem,
+          used: !monthItem.used,
+          count: monthItem.count + 1,
+        };
+      }
+      if (monthItem.number === stickyMonth) {
+        return { ...monthItem, count: monthItem.count + 1 };
       }
 
       return monthItem;
     });
     setMonths(newMonths);
-    console.log(newMonths);
   };
 
   const sortStickies = (stickiesList) => {
@@ -97,7 +81,13 @@ function App() {
         <Route
           path="/"
           element={
-            <Home day={day} month={month} year={year} setStickies={setData} />
+            <Home
+              day={day}
+              month={month}
+              year={year}
+              setStickies={setData}
+              stickies={stickies}
+            />
           }
         />
         <Route
