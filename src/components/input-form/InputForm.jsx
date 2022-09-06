@@ -1,7 +1,8 @@
 import React from "react";
-import { useForm } from "react-hook-form";
+import { set, useForm } from "react-hook-form";
 
 const InputForm = ({ day, month, year, setStickies, stickies }) => {
+  // ----------------- DEFAULT STICKY DATA ----------------------------------
   day = day.toString();
   month = month.toString();
   year = year.toString();
@@ -20,9 +21,92 @@ const InputForm = ({ day, month, year, setStickies, stickies }) => {
     formState: { errors },
   } = useForm({ defaultValues: { day, month, year } });
 
+  // ----------------- FUNCTIONS ----------------------------------
+
+  const sortData = (data) => {
+    if (!stickies) {
+      setStickies({
+        [data.year]: {
+          [data.month]: {
+            [data.day]: [{ title: data.title, body: data.body }],
+          },
+        },
+      });
+    }
+
+    if (stickies) {
+      const sameYear = Object.keys(stickies).some((year) => year === data.year);
+
+      if (sameYear) {
+        const sameMonth = Object.keys(stickies[data.year]).some(
+          (month) => month === data.month
+        );
+        if (sameMonth) {
+          const sameDay = Object.keys(stickies[data.year][data.month]).some(
+            (day) => day === data.day
+          );
+          if (sameDay) {
+            setStickies({
+              ...stickies,
+              [data.year]: {
+                ...stickies[data.year],
+                [data.month]: {
+                  ...stickies[data.year][data.month],
+                  [data.day]: [
+                    ...stickies[data.year][data.month][data.day],
+                    { title: data.title, body: data.body },
+                  ],
+                },
+              },
+            });
+          }
+          if (!sameDay) {
+            setStickies({
+              ...stickies,
+              [data.year]: {
+                ...stickies[data.year],
+                [data.month]: {
+                  ...stickies[data.year][data.month],
+                  [data.day]: [{ title: data.title, body: data.body }],
+                },
+              },
+            });
+          }
+        }
+        if (!sameMonth) {
+          setStickies({
+            ...stickies,
+            [data.year]: {
+              ...stickies[data.year],
+              [data.month]: {
+                [data.day]: [{ title: data.title, body: data.body }],
+              },
+            },
+          });
+        }
+      }
+      if (!sameYear) {
+        setStickies({
+          ...stickies,
+          [data.year]: {
+            [data.month]: {
+              [data.day]: [{ title: data.title, body: data.body }],
+            },
+          },
+        });
+      }
+    }
+  };
+
+  // ----------------- FORM SUBMIT ----------------------------------
+
   const onSubmit = (data) => {
+    sortData(data);
+
     reset();
   };
+
+  console.log(stickies);
 
   return (
     <>
