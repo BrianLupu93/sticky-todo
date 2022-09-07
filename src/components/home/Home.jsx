@@ -15,7 +15,6 @@ const Home = ({ day, month, year, setStickies, stickies }) => {
           <h4 className="app-subtitle2">YOUR DAILY TASKS</h4>
         </div>
         <div className="app-body">
-          r
           <InputForm
             day={day}
             month={month}

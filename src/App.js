@@ -54,7 +54,7 @@ function App() {
         />
         <Route
           path="/stickies-board"
-          element={<StickiesBoard stickies={stickies} months={months} />}
+          element={<StickiesBoard stickies={stickies} />}
         />
       </Routes>
     </BrowserRouter>

@@ -2,9 +2,6 @@ body {
   background-color: rgb(53, 53, 53);
 }
 
-.stickies-board {
-}
-
 .month-container {
   display: flex;
   flex-wrap: nowrap;

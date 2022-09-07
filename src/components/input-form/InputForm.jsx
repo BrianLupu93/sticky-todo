@@ -102,11 +102,8 @@ const InputForm = ({ day, month, year, setStickies, stickies }) => {
 
   const onSubmit = (data) => {
     sortData(data);
-
     reset();
   };
-
-  console.log(stickies);
 
   return (
     <>
