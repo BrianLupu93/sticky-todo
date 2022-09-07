@@ -2,32 +2,52 @@ import React from "react";
 import Stiky from "../sticky/Sticky";
 import "./StickiesBoard.css";
 
-const StickiesBoard = ({ stickies, months }) => {
+const StickiesBoard = ({ stickies }) => {
+  const makeSticky = (obj) => {
+    const dataArr = [];
+
+    let day, month, year, title, body, date;
+
+    const objYear = Object.entries(obj);
+
+    objYear.map(([key, value]) => {
+      year = key;
+      const objMonth = Object.entries(value);
+
+      objMonth.map(([key, value]) => {
+        month = key;
+        const dayObj = Object.entries(value);
+
+        dayObj.map(([key, value]) => {
+          day = key;
+
+          value.map((item) => {
+            title = item.title;
+            body = item.body;
+            date = `${day}/${month}/${year}`;
+
+            return dataArr.push({ title: title, body: body, date: date });
+          });
+        });
+      });
+    });
+    console.log(dataArr);
+    return dataArr;
+  };
+
   return (
     <div className="stikies-board">
-      {months.map((monthItem, i) => {
-        if (monthItem.used) {
-          return (
-            <div key={i}>
-              <h1 className="month-title">{monthItem.name}</h1>
-              <div className="month-container" key={i}>
-                {stickies.map((sticky, i) => {
-                  if (sticky.month === monthItem.number) {
-                    return (
-                      <Stiky
-                        key={i}
-                        title={sticky.title}
-                        body={sticky.body}
-                        date={`${sticky.day}/${sticky.month}/${sticky.year}`}
-                      />
-                    );
-                  }
-                })}
-              </div>
-            </div>
-          );
-        }
-      })}
+      <div>
+        <h1 className="month-title"></h1>
+        <div className="month-container">
+          {stickies &&
+            makeSticky(stickies).map((item) => {
+              return (
+                <Stiky title={item.title} body={item.body} date={item.date} />
+              );
+            })}
+        </div>
+      </div>
     </div>
   );
 };
