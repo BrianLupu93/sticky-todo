@@ -1,11 +1,31 @@
 import React from "react";
+import { useEffect } from "react";
+import { useState } from "react";
 import Stiky from "../sticky/Sticky";
 import "./StickiesBoard.css";
 
 const StickiesBoard = ({ stickies }) => {
+  // ----------------- LOCAL STATE ----------------------------------
+  const [months, setMonths] = useState([
+    { name: "January", number: "01", used: false },
+    { name: "February", number: "02", used: false },
+    { name: "March", number: "03", used: false },
+    { name: "April", number: "04", used: false },
+    { name: "May", number: "05", used: false },
+    { name: "June", number: "06", used: false },
+    { name: "July", number: "07", used: false },
+    { name: "August", number: "08", used: false },
+    { name: "September", number: "09", used: false },
+    { name: "October", number: "10", used: false },
+    { name: "November", number: "11", used: false },
+    { name: "December", number: "12", used: false },
+  ]);
+
+  // ----------------- FUNCTIONS ----------------------------------
+
+  // Return the stickies array
   const makeSticky = (obj) => {
     const dataArr = [];
-
     let day, month, year, title, body, date;
 
     const objYear = Object.entries(obj);
@@ -22,31 +42,80 @@ const StickiesBoard = ({ stickies }) => {
           day = key;
 
           value.map((item) => {
-            title = item.title;
-            body = item.body;
-            date = `${day}/${month}/${year}`;
+            const sticky = {
+              title: item.title,
+              body: item.body,
+              date: `${day}/${month}/${year}`,
+            };
 
-            return dataArr.push({ title: title, body: body, date: date });
+            return dataArr.push(sticky);
           });
         });
       });
     });
-    console.log(dataArr);
+
     return dataArr;
   };
+
+  // Set months.used true if there is at least one stiky per month
+
+  const checkMonths = (arr) => {
+    const newMonths = [];
+    months.forEach((monthItem) => {
+      const monthNum = monthItem.number;
+
+      const hasNumber = arr.some(
+        (sticky) => sticky.date[3] + sticky.date[4] === monthNum
+      );
+
+      if (hasNumber && !monthItem.used) {
+        monthItem = { ...monthItem, used: !monthItem.used };
+      }
+
+      newMonths.push(monthItem);
+    });
+
+    return setMonths(newMonths);
+  };
+
+  // ----------------- SIDE EFFECTS ----------------------------------
+
+  useEffect(() => {
+    if (stickies) {
+      checkMonths(makeSticky(stickies));
+    }
+  }, [stickies]);
 
   return (
     <div className="stikies-board">
       <div>
-        <h1 className="month-title"></h1>
-        <div className="month-container">
-          {stickies &&
-            makeSticky(stickies).map((item) => {
-              return (
-                <Stiky title={item.title} body={item.body} date={item.date} />
-              );
-            })}
-        </div>
+        {months
+          .filter((monthItem) => {
+            return monthItem.used === true;
+          })
+          .map((month, i) => {
+            return (
+              <div key={i}>
+                <h2 className="month-title">{month.name}</h2>
+                <div className="month-container">
+                  {makeSticky(stickies)
+                    .filter((sticky) => {
+                      return sticky.date[3] + sticky.date[4] === month.number;
+                    })
+                    .map((sticky, i) => {
+                      return (
+                        <Stiky
+                          key={i}
+                          title={sticky.title}
+                          body={sticky.body}
+                          date={sticky.date}
+                        />
+                      );
+                    })}
+                </div>
+              </div>
+            );
+          })}
       </div>
     </div>
   );
