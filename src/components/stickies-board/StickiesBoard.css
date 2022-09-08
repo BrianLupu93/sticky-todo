@@ -4,8 +4,9 @@ body {
 
 .month-container {
   display: flex;
+  width: 1400px;
+  justify-content: center;
   flex-wrap: nowrap;
-  overflow-x: auto;
 }
 
 .month-title {

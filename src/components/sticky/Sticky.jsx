@@ -3,7 +3,7 @@ import "./Sticky.css";
 
 const Sticky = (props) => {
   return (
-    <>
+    <div style={props.style}>
       <div className="sticky-container">
         <div className="sticky-content">
           <div className="header">
@@ -21,7 +21,7 @@ const Sticky = (props) => {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
