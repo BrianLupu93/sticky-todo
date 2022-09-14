@@ -4,6 +4,7 @@ import { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./components/home/Home";
 import StickiesBoard from "./components/stickies-board/StickiesBoard";
+import EditForm from "./components/edit-form/EditForm";
 
 function App() {
   // ----------------- GLOBAL STATE ----------------------------------
@@ -41,6 +42,8 @@ function App() {
           path="/stickies-board"
           element={<StickiesBoard stickies={stickies} />}
         />
+
+        <Route path="/edit" element={<EditForm />} />
       </Routes>
     </BrowserRouter>
   );

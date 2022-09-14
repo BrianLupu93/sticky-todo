@@ -2,11 +2,15 @@ body {
   background-color: rgb(53, 53, 53);
 }
 
+.stickies-board {
+  width: 1410px;
+}
+
 .month-container {
   display: flex;
-  width: 1400px;
+  width: 1410px;
   justify-content: center;
-  flex-wrap: nowrap;
+  overflow-x: scroll;
 }
 
 .month-title {
@@ -14,4 +18,46 @@ body {
   text-align: center;
   padding-bottom: 10px;
   border-bottom: 0.5px solid green;
+}
+.to-sticky-btn {
+  margin-top: 10px;
+
+  display: flex;
+  justify-items: start;
+}
+.create-sticky {
+  color: white;
+  border: 1px solid white;
+  border-radius: 10px;
+  font-size: 20px;
+  width: 300px;
+  height: 35px;
+  text-align: center;
+}
+.create-sticky:hover {
+  color: green;
+}
+.create-sticky:active {
+  color: red;
+}
+
+.scroll-btns-container {
+  display: flex;
+  justify-content: space-between;
+  margin-left: 50px;
+  margin-right: 50px;
+}
+
+#slideLeft,
+#slideRight {
+  font-size: 30px;
+  color: white;
+}
+#slideLeft:hover,
+#slideRight:hover {
+  color: green;
+}
+#slideLeft:active,
+#slideRight:active {
+  color: red;
 }

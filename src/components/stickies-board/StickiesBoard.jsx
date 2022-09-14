@@ -3,6 +3,9 @@ import { useEffect } from "react";
 import { useState } from "react";
 import Stiky from "../sticky/Sticky";
 import "./StickiesBoard.css";
+import { useNavigate } from "react-router-dom";
+import { FaAngleRight } from "react-icons/fa";
+import { FaAngleLeft } from "react-icons/fa";
 
 const StickiesBoard = ({ stickies }) => {
   // ----------------- LOCAL STATE ----------------------------------
@@ -21,7 +24,21 @@ const StickiesBoard = ({ stickies }) => {
     { name: "December", number: "12", used: false },
   ]);
 
+  const navigate = useNavigate();
+
   // ----------------- FUNCTIONS ----------------------------------
+
+  // Bunttons Slide
+
+  const buttonRight = document.getElementById("slideRight");
+  const buttonLeft = document.getElementById("slideLeft");
+
+  const next = () => {
+    document.querySelector(".month-container").scrollLeft += 470;
+  };
+  const prev = () => {
+    document.querySelector(".month-container").scrollLeft -= 470;
+  };
 
   // Return the stickies array
   const makeSticky = (obj) => {
@@ -88,6 +105,12 @@ const StickiesBoard = ({ stickies }) => {
 
   return (
     <div className="stikies-board">
+      <div className="to-sticky-btn">
+        <button className="create-sticky" onClick={() => navigate("/")}>
+          back to Create Sticky
+        </button>
+      </div>
+
       <div>
         {months
           .filter((monthItem) => {
@@ -112,6 +135,14 @@ const StickiesBoard = ({ stickies }) => {
                         />
                       );
                     })}
+                </div>
+                <div className="scroll-btns-container">
+                  <button id="slideLeft" onClick={() => prev()}>
+                    <FaAngleLeft />
+                  </button>
+                  <button id="slideRight" onClick={() => next()}>
+                    <FaAngleRight />
+                  </button>
                 </div>
               </div>
             );
