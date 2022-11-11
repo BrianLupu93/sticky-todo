@@ -6,14 +6,12 @@ import nextId from "react-id-generator";
 import { useNavigate } from "react-router-dom";
 import { Modal } from "react-bootstrap";
 import { Button } from "react-bootstrap";
+import { useEffect } from "react";
 
 const EditForm = ({ stickies, setStickies }) => {
   const location = useLocation();
   const stickyData = location.state;
   const navigate = useNavigate();
-
-  console.log(stickyData);
-  console.log(stickies);
 
   const {
     register,
@@ -30,6 +28,10 @@ const EditForm = ({ stickies, setStickies }) => {
       id: stickyData.id,
     },
   });
+
+  useEffect(() => {
+    deleteSticky(stickyData);
+  }, [stickyData]);
 
   // ------------------ FUNCTIONS ---------------------------
 
@@ -139,8 +141,6 @@ const EditForm = ({ stickies, setStickies }) => {
   };
 
   const onSubmit = (data) => {
-    deleteSticky(stickyData);
-
     sortData(data);
 
     navigate("/stickies-board");
@@ -203,7 +203,7 @@ const EditForm = ({ stickies, setStickies }) => {
               </div>
               <div className="sticky-btns">
                 <button className="submit-btn" type="submit">
-                  Edit Sticky
+                  Save Sticky
                 </button>
               </div>
             </div>

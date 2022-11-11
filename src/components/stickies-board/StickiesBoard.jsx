@@ -8,6 +8,7 @@ import { FaAngleRight } from "react-icons/fa";
 import { FaAngleLeft } from "react-icons/fa";
 
 const StickiesBoard = ({ stickies }) => {
+  console.log(stickies);
   // ----------------- LOCAL STATE ----------------------------------
   const [months, setMonths] = useState([
     { name: "January", number: "01", used: false },
