@@ -8,7 +8,7 @@ body {
 
 .month-container {
   display: flex;
-  max-width: 1410px;
+  width: 1410px;
   overflow-x: scroll;
 }
 
@@ -19,8 +19,9 @@ body {
   border-bottom: 0.5px solid green;
 }
 .to-sticky-btn {
-  margin-top: 10px;
-
+  position: fixed;
+  top: 10px;
+  left: 50px;
   display: flex;
   justify-items: start;
 }

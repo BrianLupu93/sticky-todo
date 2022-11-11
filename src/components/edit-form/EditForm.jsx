@@ -143,7 +143,12 @@ const EditForm = ({ stickies, setStickies }) => {
   };
 
   return (
-    <div>
+    <>
+      <div className="app-header">
+        <h1 className="app-title">My sticky Notes</h1>
+        <h2 className="app-subtitle">Create - Track - Keep</h2>
+        <h4 className="app-subtitle2">EDIT YOUR STICKY</h4>
+      </div>
       <form
         action="submit"
         className="sticky-form"
@@ -206,7 +211,7 @@ const EditForm = ({ stickies, setStickies }) => {
           </div>
         </div>
       </form>
-    </div>
+    </>
   );
 };
 
