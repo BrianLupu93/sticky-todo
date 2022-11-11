@@ -73,7 +73,9 @@ const StickiesBoard = ({ stickies }) => {
       });
     });
 
-    return dataArr;
+    return dataArr.sort(
+      (a, b) => a.date.substring(0, 2) - b.date.substring(0, 2)
+    );
   };
 
   // Set months.used true if there is at least one stiky per month
