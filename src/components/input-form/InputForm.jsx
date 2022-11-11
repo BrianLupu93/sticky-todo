@@ -1,9 +1,13 @@
 import Toast from "../toast/Toast";
 import React from "react";
-import { useForm } from "react-hook-form";
+import { set, useForm } from "react-hook-form";
 import nextId from "react-id-generator/";
+import { useState } from "react";
+import { useEffect } from "react";
 
 const InputForm = ({ day, month, year, id, setStickies, stickies }) => {
+  const [completeMessage, setCompleteMessage] = useState(false);
+
   // ----------------- DEFAULT STICKY DATA ----------------------------------
   day = day.toString();
   month = month.toString();
@@ -22,6 +26,16 @@ const InputForm = ({ day, month, year, id, setStickies, stickies }) => {
     reset,
     formState: { errors },
   } = useForm({ defaultValues: { day, month, year, id } });
+
+  // ----------------- EFFECTS ----------------------------------
+
+  useEffect(() => {
+    if (completeMessage) {
+      const timeout = setTimeout(() => {
+        setCompleteMessage(false);
+      }, 1000);
+    }
+  }, [stickies]);
 
   // ----------------- FUNCTIONS ----------------------------------
 
@@ -110,6 +124,7 @@ const InputForm = ({ day, month, year, id, setStickies, stickies }) => {
 
   const onSubmit = (data) => {
     sortData(data);
+    setCompleteMessage(true);
     reset();
   };
 
@@ -133,7 +148,11 @@ const InputForm = ({ day, month, year, id, setStickies, stickies }) => {
                   placeholder="Sticker Title"
                 />
                 {errors.title && (
-                  <Toast message={errors.title.message} position={1} />
+                  <Toast
+                    message={errors.title.message}
+                    position={1}
+                    type={"ERROR!"}
+                  />
                 )}
               </h1>
             </div>
@@ -149,7 +168,11 @@ const InputForm = ({ day, month, year, id, setStickies, stickies }) => {
                 />
               </p>
               {errors.body && (
-                <Toast message={errors.body.message} position={2} />
+                <Toast
+                  message={errors.body.message}
+                  position={2}
+                  type={"ERROR!"}
+                />
               )}
             </div>
             <div className="footer">
@@ -171,7 +194,11 @@ const InputForm = ({ day, month, year, id, setStickies, stickies }) => {
                     placeholder={day}
                   />
                   {errors.day && (
-                    <Toast message={errors.day.message} position={3} />
+                    <Toast
+                      message={errors.day.message}
+                      position={3}
+                      type={"ERROR!"}
+                    />
                   )}
                   /
                   <input
@@ -190,7 +217,11 @@ const InputForm = ({ day, month, year, id, setStickies, stickies }) => {
                     placeholder={month}
                   />
                   {errors.month && (
-                    <Toast message={errors.month.message} position={4} />
+                    <Toast
+                      message={errors.month.message}
+                      position={4}
+                      type={"ERROR!"}
+                    />
                   )}
                   /
                   <input
@@ -209,7 +240,11 @@ const InputForm = ({ day, month, year, id, setStickies, stickies }) => {
                     placeholder={year}
                   />
                   {errors.year && (
-                    <Toast message={errors.year.message} position={5} />
+                    <Toast
+                      message={errors.year.message}
+                      position={5}
+                      type={"ERROR!"}
+                    />
                   )}
                 </div>
               </div>
@@ -219,6 +254,14 @@ const InputForm = ({ day, month, year, id, setStickies, stickies }) => {
                 </button>
               </div>
             </div>
+
+            {completeMessage && (
+              <Toast
+                type={"COMPLETE"}
+                position={6}
+                message={"A new Sticky was created!"}
+              />
+            )}
           </div>
         </div>
       </form>

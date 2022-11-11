@@ -63,9 +63,27 @@
   justify-content: center;
   align-items: center;
 }
+.toast-container-6 {
+  position: fixed;
+  top: 80px;
+  right: 50px;
+  display: flex;
+  width: 300px;
+  background-color: rgb(136, 133, 133, 0.6);
+  height: 50px;
+  border: 1px solid white;
+  border-radius: 15px;
+  justify-content: center;
+  align-items: center;
+}
 
-.toast-header {
+.toast-header-error {
   color: rgb(191, 33, 33);
+  font-size: 16px;
+  font-weight: lighter;
+}
+.toast-header-complete {
+  color: rgb(21, 165, 21);
   font-size: 16px;
   font-weight: lighter;
 }
