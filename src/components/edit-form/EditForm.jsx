@@ -9,12 +9,7 @@ const EditForm = ({ stickies, setStickies }) => {
   const stickyData = location.state;
   const navigate = useNavigate();
 
-  const {
-    register,
-    handleSubmit,
-    reset,
-    formState: { errors },
-  } = useForm({
+  const { register, handleSubmit } = useForm({
     defaultValues: {
       day: stickyData.date.substring(0, 2),
       month: stickyData.date.substring(3, 5),

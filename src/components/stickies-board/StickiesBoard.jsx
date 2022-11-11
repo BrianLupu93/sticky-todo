@@ -4,10 +4,9 @@ import { useState } from "react";
 import Stiky from "../sticky/Sticky";
 import "./StickiesBoard.css";
 import { useNavigate } from "react-router-dom";
-import { FaAngleRight, FaWindows } from "react-icons/fa";
+import { FaAngleRight } from "react-icons/fa";
 import { FaAngleLeft } from "react-icons/fa";
 import Modal from "../modal/Modal";
-import { set } from "react-hook-form";
 
 const StickiesBoard = ({ stickies, setStickies }) => {
   // ----------------- LOCAL STATE ----------------------------------
@@ -46,7 +45,7 @@ const StickiesBoard = ({ stickies, setStickies }) => {
   // Return the stickies array
   const makeSticky = (obj) => {
     const dataArr = [];
-    let day, month, year, title, body, date, id;
+    let day, month, year;
 
     const objYear = Object.entries(obj);
 

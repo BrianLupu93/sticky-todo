@@ -1,6 +1,6 @@
 import Toast from "../toast/Toast";
 import React from "react";
-import { set, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import nextId from "react-id-generator/";
 import { useState } from "react";
 import { useEffect } from "react";
@@ -31,7 +31,7 @@ const InputForm = ({ day, month, year, id, setStickies, stickies }) => {
 
   useEffect(() => {
     if (completeMessage) {
-      const timeout = setTimeout(() => {
+      setTimeout(() => {
         setCompleteMessage(false);
       }, 1000);
     }
