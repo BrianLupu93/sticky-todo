@@ -1,3 +1,4 @@
+import Toast from "../toast/Toast";
 import React from "react";
 import { useForm } from "react-hook-form";
 import nextId from "react-id-generator/";
@@ -124,43 +125,92 @@ const InputForm = ({ day, month, year, id, setStickies, stickies }) => {
             <div className="header">
               <h1 className="title">
                 <input
-                  {...register("title", { required: true })}
+                  {...register("title", {
+                    required: { value: true, message: "Type the Tiltle!" },
+                  })}
                   className="input-title "
                   type="text"
                   placeholder="Sticker Title"
                 />
+                {errors.title && (
+                  <Toast message={errors.title.message} position={1} />
+                )}
               </h1>
             </div>
             <div className="body">
               <p>
                 <textarea
-                  {...register("body", { required: true })}
+                  {...register("body", {
+                    required: { value: true, message: "Type the Body!" },
+                  })}
                   className="input-body"
                   type="text"
                   placeholder="Sticker text holder"
                 />
               </p>
+              {errors.body && (
+                <Toast message={errors.body.message} position={2} />
+              )}
             </div>
             <div className="footer">
               <div className="input-date">
                 <div className="date">
                   <input
-                    {...register("day")}
+                    {...register("day", {
+                      minLength: {
+                        value: 2,
+                        message: "Day must have 2 digits!",
+                      },
+                      maxLength: {
+                        value: 2,
+                        message: "Day must have 2 digits!",
+                      },
+                      required: { value: true, message: "Type the Day!" },
+                    })}
                     className="input-date day"
                     placeholder={day}
                   />
+                  {errors.day && (
+                    <Toast message={errors.day.message} position={3} />
+                  )}
                   /
                   <input
-                    {...register("month")}
+                    {...register("month", {
+                      minLength: {
+                        value: 2,
+                        message: "Month must have 2 digits!",
+                      },
+                      maxLength: {
+                        value: 2,
+                        message: "Month must have 2 digits!",
+                      },
+                      required: { value: true, message: "Type the Month!" },
+                    })}
                     className="input-date month"
                     placeholder={month}
                   />
+                  {errors.month && (
+                    <Toast message={errors.month.message} position={4} />
+                  )}
                   /
                   <input
-                    {...register("year")}
+                    {...register("year", {
+                      minLength: {
+                        value: 4,
+                        message: "Year must have 4 digits!",
+                      },
+                      maxLength: {
+                        value: 4,
+                        message: "Year must have 4 digits!",
+                      },
+                      required: { value: true, message: "Type the Year!" },
+                    })}
                     className="input-date year"
                     placeholder={year}
                   />
+                  {errors.year && (
+                    <Toast message={errors.year.message} position={5} />
+                  )}
                 </div>
               </div>
               <div className="sticky-btns">

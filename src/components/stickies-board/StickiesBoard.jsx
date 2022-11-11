@@ -163,7 +163,9 @@ const StickiesBoard = ({ stickies, setStickies }) => {
           back to Create Sticky
         </button>
       </div>
-
+      <div className="app-header">
+        <h1 className="app-title">STICKIES BOARD</h1>
+      </div>
       <div>
         {months
           .filter((monthItem) => {
@@ -197,10 +199,36 @@ const StickiesBoard = ({ stickies, setStickies }) => {
                     })}
                 </div>
                 <div className="scroll-btns-container">
-                  <button id="slideLeft" onClick={() => prev()}>
+                  <button
+                    style={{
+                      display:
+                        makeSticky(stickies).filter((sticky) => {
+                          return (
+                            sticky.date[3] + sticky.date[4] === month.number
+                          );
+                        }).length > 3
+                          ? "block"
+                          : "none",
+                    }}
+                    id="slideLeft"
+                    onClick={() => prev()}
+                  >
                     <FaAngleLeft />
                   </button>
-                  <button id="slideRight" onClick={() => next()}>
+                  <button
+                    style={{
+                      display:
+                        makeSticky(stickies).filter((sticky) => {
+                          return (
+                            sticky.date[3] + sticky.date[4] === month.number
+                          );
+                        }).length > 3
+                          ? "block"
+                          : "none",
+                    }}
+                    id="slideRight"
+                    onClick={() => next()}
+                  >
                     <FaAngleRight />
                   </button>
                 </div>
