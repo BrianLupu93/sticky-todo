@@ -1,7 +1,8 @@
 import React from "react";
-import { set, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
+import nextId from "react-id-generator/";
 
-const InputForm = ({ day, month, year, setStickies, stickies }) => {
+const InputForm = ({ day, month, year, id, setStickies, stickies }) => {
   // ----------------- DEFAULT STICKY DATA ----------------------------------
   day = day.toString();
   month = month.toString();
@@ -19,7 +20,7 @@ const InputForm = ({ day, month, year, setStickies, stickies }) => {
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm({ defaultValues: { day, month, year } });
+  } = useForm({ defaultValues: { day, month, year, id } });
 
   // ----------------- FUNCTIONS ----------------------------------
 
@@ -28,7 +29,7 @@ const InputForm = ({ day, month, year, setStickies, stickies }) => {
       setStickies({
         [data.year]: {
           [data.month]: {
-            [data.day]: [{ title: data.title, body: data.body }],
+            [data.day]: [{ title: data.title, body: data.body, id: nextId() }],
           },
         },
       });
@@ -54,7 +55,7 @@ const InputForm = ({ day, month, year, setStickies, stickies }) => {
                   ...stickies[data.year][data.month],
                   [data.day]: [
                     ...stickies[data.year][data.month][data.day],
-                    { title: data.title, body: data.body },
+                    { title: data.title, body: data.body, id: nextId() },
                   ],
                 },
               },
@@ -67,7 +68,9 @@ const InputForm = ({ day, month, year, setStickies, stickies }) => {
                 ...stickies[data.year],
                 [data.month]: {
                   ...stickies[data.year][data.month],
-                  [data.day]: [{ title: data.title, body: data.body }],
+                  [data.day]: [
+                    { title: data.title, body: data.body, id: nextId() },
+                  ],
                 },
               },
             });
@@ -79,7 +82,9 @@ const InputForm = ({ day, month, year, setStickies, stickies }) => {
             [data.year]: {
               ...stickies[data.year],
               [data.month]: {
-                [data.day]: [{ title: data.title, body: data.body }],
+                [data.day]: [
+                  { title: data.title, body: data.body, id: nextId() },
+                ],
               },
             },
           });
@@ -90,7 +95,9 @@ const InputForm = ({ day, month, year, setStickies, stickies }) => {
           ...stickies,
           [data.year]: {
             [data.month]: {
-              [data.day]: [{ title: data.title, body: data.body }],
+              [data.day]: [
+                { title: data.title, body: data.body, id: nextId() },
+              ],
             },
           },
         });

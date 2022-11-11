@@ -8,8 +8,7 @@ body {
 
 .month-container {
   display: flex;
-  width: 1410px;
-  justify-content: center;
+  max-width: 1410px;
   overflow-x: scroll;
 }
 

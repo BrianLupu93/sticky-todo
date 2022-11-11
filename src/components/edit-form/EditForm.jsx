@@ -1,23 +1,151 @@
 import React from "react";
+import { useState } from "react";
 import { set, useForm } from "react-hook-form";
-import { useLocation } from "react-router-dom";
+import { Navigate, useLocation } from "react-router-dom";
+import nextId from "react-id-generator";
+import { useNavigate } from "react-router-dom";
+import { Modal } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 
-const EditForm = (props) => {
+const EditForm = ({ stickies, setStickies }) => {
   const location = useLocation();
+  const stickyData = location.state;
+  const navigate = useNavigate();
 
-  const test = props.location.state || {};
+  console.log(stickyData);
+  console.log(stickies);
 
   const {
     register,
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm();
+  } = useForm({
+    defaultValues: {
+      day: stickyData.date.substring(0, 2),
+      month: stickyData.date.substring(3, 5),
+      year: stickyData.date.substring(6, 10),
+      title: stickyData.title,
+      body: stickyData.body,
+      id: stickyData.id,
+    },
+  });
+
+  // ------------------ FUNCTIONS ---------------------------
+
+  const deleteSticky = (stickyToDelete) => {
+    const day = stickyToDelete.date.substring(0, 2);
+    const month = stickyToDelete.date.substring(3, 5);
+    const year = stickyToDelete.date.substring(6, 10);
+
+    const id = stickyToDelete.id;
+
+    const newStickies = stickies[year][month][day].filter(
+      (sticky) => sticky.id !== id
+    );
+
+    setStickies({
+      ...stickies,
+      [year]: {
+        ...stickies[year],
+        [month]: { ...stickies[year][month], [day]: newStickies },
+      },
+    });
+    return stickies;
+  };
+
+  const sortData = (data) => {
+    if (!stickies) {
+      setStickies({
+        [data.year]: {
+          [data.month]: {
+            [data.day]: [
+              { title: data.title, body: data.body, id: stickyData.id },
+            ],
+          },
+        },
+      });
+    }
+
+    if (stickies) {
+      const sameYear = Object.keys(stickies).some((year) => year === data.year);
+
+      if (sameYear) {
+        const sameMonth = Object.keys(stickies[data.year]).some(
+          (month) => month === data.month
+        );
+        if (sameMonth) {
+          const sameDay = Object.keys(stickies[data.year][data.month]).some(
+            (day) => day === data.day
+          );
+          if (sameDay) {
+            setStickies({
+              ...stickies,
+              [data.year]: {
+                ...stickies[data.year],
+                [data.month]: {
+                  ...stickies[data.year][data.month],
+                  [data.day]: [
+                    ...stickies[data.year][data.month][data.day],
+                    { title: data.title, body: data.body, id: stickyData.id },
+                  ],
+                },
+              },
+            });
+          }
+          if (!sameDay) {
+            setStickies({
+              ...stickies,
+              [data.year]: {
+                ...stickies[data.year],
+                [data.month]: {
+                  ...stickies[data.year][data.month],
+                  [data.day]: [
+                    { title: data.title, body: data.body, id: stickyData.id },
+                  ],
+                },
+              },
+            });
+          }
+        }
+        if (!sameMonth) {
+          setStickies({
+            ...stickies,
+            [data.year]: {
+              ...stickies[data.year],
+              [data.month]: {
+                [data.day]: [
+                  { title: data.title, body: data.body, id: stickyData.id },
+                ],
+              },
+            },
+          });
+        }
+      }
+      if (!sameYear) {
+        setStickies({
+          ...stickies,
+          [data.year]: {
+            [data.month]: {
+              [data.day]: [
+                { title: data.title, body: data.body, id: stickyData.id },
+              ],
+            },
+          },
+        });
+      }
+    }
+    return stickies;
+  };
 
   const onSubmit = (data) => {
-    reset();
+    deleteSticky(stickyData);
+
+    sortData(data);
+
+    navigate("/stickies-board");
   };
-  console.log(test);
+
   return (
     <div>
       <form
@@ -30,7 +158,9 @@ const EditForm = (props) => {
             <div className="header">
               <h1 className="title">
                 <input
-                  {...register("title", { required: true })}
+                  {...register("title", {
+                    required: true,
+                  })}
                   className="input-title "
                   type="text"
                   placeholder="Sticker Title"
@@ -40,7 +170,9 @@ const EditForm = (props) => {
             <div className="body">
               <p>
                 <textarea
-                  {...register("body", { required: true })}
+                  {...register("body", {
+                    required: true,
+                  })}
                   className="input-body"
                   type="text"
                   placeholder="Sticker text holder"
@@ -70,8 +202,8 @@ const EditForm = (props) => {
                 </div>
               </div>
               <div className="sticky-btns">
-                <button type="submit" className="submit-btn">
-                  Submit Sticky
+                <button className="submit-btn" type="submit">
+                  Edit Sticky
                 </button>
               </div>
             </div>

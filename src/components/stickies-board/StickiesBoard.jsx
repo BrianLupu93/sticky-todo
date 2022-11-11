@@ -34,16 +34,16 @@ const StickiesBoard = ({ stickies }) => {
   const buttonLeft = document.getElementById("slideLeft");
 
   const next = () => {
-    document.querySelector(".month-container").scrollLeft += 470;
+    document.querySelector(".month-container").scrollLeft += 1410;
   };
   const prev = () => {
-    document.querySelector(".month-container").scrollLeft -= 470;
+    document.querySelector(".month-container").scrollLeft -= 1410;
   };
 
   // Return the stickies array
   const makeSticky = (obj) => {
     const dataArr = [];
-    let day, month, year, title, body, date;
+    let day, month, year, title, body, date, id;
 
     const objYear = Object.entries(obj);
 
@@ -63,6 +63,7 @@ const StickiesBoard = ({ stickies }) => {
               title: item.title,
               body: item.body,
               date: `${day}/${month}/${year}`,
+              id: item.id,
             };
 
             return dataArr.push(sticky);
@@ -132,6 +133,7 @@ const StickiesBoard = ({ stickies }) => {
                           title={sticky.title}
                           body={sticky.body}
                           date={sticky.date}
+                          id={sticky.id}
                         />
                       );
                     })}

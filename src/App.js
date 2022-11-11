@@ -43,7 +43,10 @@ function App() {
           element={<StickiesBoard stickies={stickies} />}
         />
 
-        <Route path="/edit" element={<EditForm />} />
+        <Route
+          path="/edit"
+          element={<EditForm stickies={stickies} setStickies={setStickies} />}
+        />
       </Routes>
     </BrowserRouter>
   );

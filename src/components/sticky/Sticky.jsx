@@ -2,17 +2,17 @@ import React from "react";
 import "./Sticky.css";
 import { useNavigate } from "react-router-dom";
 
-const Sticky = ({ style, title, body, date }) => {
+const Sticky = ({ title, body, date, id }) => {
   const navigate = useNavigate();
 
-  const editSticky = ({ style, title, body, date }) => {
+  const editSticky = ({ title, body, date, id }) => {
     navigate("/edit", {
-      state: { data: style, title, body, date },
+      state: { title: title, body: body, date: date, id: id },
     });
   };
 
   return (
-    <div style={style}>
+    <>
       <div className="sticky-container">
         <div className="sticky-content">
           <div className="header">
@@ -26,7 +26,7 @@ const Sticky = ({ style, title, body, date }) => {
             <div className="sticky-btns">
               <button
                 className="edit-btn"
-                onClick={() => editSticky({ style, title, body, date })}
+                onClick={() => editSticky({ title, body, date, id })}
               >
                 edit
               </button>
@@ -35,7 +35,7 @@ const Sticky = ({ style, title, body, date }) => {
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
