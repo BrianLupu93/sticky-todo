@@ -152,3 +152,12 @@ textarea {
 .input-date:focus::placeholder {
   color: transparent;
 }
+
+.delete-btn:disabled {
+  color: gray;
+  opacity: 0.3;
+}
+.edit-btn:disabled {
+  color: gray;
+  opacity: 0.3;
+}

@@ -4,12 +4,17 @@ import { useState } from "react";
 import Stiky from "../sticky/Sticky";
 import "./StickiesBoard.css";
 import { useNavigate } from "react-router-dom";
-import { FaAngleRight } from "react-icons/fa";
+import { FaAngleRight, FaWindows } from "react-icons/fa";
 import { FaAngleLeft } from "react-icons/fa";
+import Modal from "../modal/Modal";
+import { set } from "react-hook-form";
 
-const StickiesBoard = ({ stickies }) => {
-  console.log(stickies);
+const StickiesBoard = ({ stickies, setStickies }) => {
   // ----------------- LOCAL STATE ----------------------------------
+  const [visible, setVisible] = useState(false);
+  const [disabled, setDisabled] = useState(false);
+  const [stickyToDelete, setStickyToDelete] = useState();
+
   const [months, setMonths] = useState([
     { name: "January", number: "01", used: false },
     { name: "February", number: "02", used: false },
@@ -30,9 +35,6 @@ const StickiesBoard = ({ stickies }) => {
   // ----------------- FUNCTIONS ----------------------------------
 
   // Bunttons Slide
-
-  const buttonRight = document.getElementById("slideRight");
-  const buttonLeft = document.getElementById("slideLeft");
 
   const next = () => {
     document.querySelector(".month-container").scrollLeft += 1410;
@@ -107,6 +109,53 @@ const StickiesBoard = ({ stickies }) => {
     }
   }, [stickies]);
 
+  // ----------------- FUNCTIONS ----------------------------------
+  const sureNo = () => {
+    setVisible(false);
+    setDisabled(false);
+  };
+  const sureYes = () => {
+    deleteSticky(stickyToDelete);
+    setVisible(false);
+    setDisabled(false);
+  };
+
+  console.log(stickies);
+
+  const deleteSticky = (stickyToDelete) => {
+    const day = stickyToDelete.date.substring(0, 2);
+    const month = stickyToDelete.date.substring(3, 5);
+    const year = stickyToDelete.date.substring(6, 10);
+
+    const id = stickyToDelete.id;
+
+    const newStickies = stickies[year][month][day].filter(
+      (sticky) => sticky.id !== id
+    );
+
+    if (newStickies.length === 0) {
+      const newMonths = [];
+
+      months.filter((monthItem) => {
+        if (monthItem.number === month) {
+          return !monthItem.used;
+        }
+        newMonths.push(monthItem);
+      });
+      setMonths(newMonths);
+    }
+
+    setStickies({
+      ...stickies,
+      [year]: {
+        ...stickies[year],
+        [month]: { ...stickies[year][month], [day]: newStickies },
+      },
+    });
+
+    return stickies;
+  };
+
   return (
     <div className="stikies-board">
       <div className="to-sticky-btn">
@@ -132,6 +181,12 @@ const StickiesBoard = ({ stickies }) => {
                     .map((sticky, i) => {
                       return (
                         <Stiky
+                          setVisible={setVisible}
+                          setStickies={setStickies}
+                          disabled={disabled}
+                          setDisabled={setDisabled}
+                          stickies={stickies}
+                          setStickyToDelete={setStickyToDelete}
                           key={i}
                           title={sticky.title}
                           body={sticky.body}
@@ -152,6 +207,9 @@ const StickiesBoard = ({ stickies }) => {
               </div>
             );
           })}
+      </div>
+      <div style={{ display: !visible ? "none" : "block" }}>
+        <Modal yes={sureYes} no={sureNo} />
       </div>
     </div>
   );

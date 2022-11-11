@@ -2,8 +2,21 @@ import React from "react";
 import "./Sticky.css";
 import { useNavigate } from "react-router-dom";
 
-const Sticky = ({ title, body, date, id }) => {
+const Sticky = ({
+  title,
+  body,
+  date,
+  id,
+  setStickies,
+  stickies,
+  setVisible,
+  setDisabled,
+  disabled,
+  setStickyToDelete,
+}) => {
   const navigate = useNavigate();
+
+  // ----------------- FUNCTIONS ----------------------------------
 
   const editSticky = ({ title, body, date, id }) => {
     navigate("/edit", {
@@ -25,12 +38,28 @@ const Sticky = ({ title, body, date, id }) => {
             <div className="date">{date}</div>
             <div className="sticky-btns">
               <button
+                disabled={disabled}
                 className="edit-btn"
                 onClick={() => editSticky({ title, body, date, id })}
               >
                 edit
               </button>
-              <button className="delete-btn">delete</button>
+              <button
+                disabled={disabled}
+                className="delete-btn"
+                onClick={() => {
+                  setStickyToDelete({
+                    title: title,
+                    body: body,
+                    date: date,
+                    id: id,
+                  });
+                  setVisible(true);
+                  setDisabled(true);
+                }}
+              >
+                delete
+              </button>
             </div>
           </div>
         </div>

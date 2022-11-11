@@ -40,7 +40,9 @@ function App() {
         />
         <Route
           path="/stickies-board"
-          element={<StickiesBoard stickies={stickies} />}
+          element={
+            <StickiesBoard stickies={stickies} setStickies={setStickies} />
+          }
         />
 
         <Route

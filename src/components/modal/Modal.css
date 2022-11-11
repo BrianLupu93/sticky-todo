@@ -1,0 +1,37 @@
+.modal-container {
+  position: fixed;
+  top: 50px;
+  right: 50px;
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(136, 133, 133, 0.6);
+  width: 400px;
+  height: 120px;
+  font-size: 20px;
+  border: 1px solid white;
+  border-radius: 15px;
+  justify-content: center;
+  align-items: center;
+}
+.modal-header {
+  margin-bottom: 30px;
+  color: rgb(53, 180, 53);
+}
+.modal-footer {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.modal-btn {
+  margin-left: 20px;
+  margin-right: 20px;
+  font-weight: bold;
+  font-size: 20px;
+  color: white;
+}
+.yes:hover {
+  color: green;
+}
+.no:hover {
+  color: red;
+}

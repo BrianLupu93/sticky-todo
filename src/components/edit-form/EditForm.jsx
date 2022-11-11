@@ -1,11 +1,7 @@
 import React from "react";
-import { useState } from "react";
-import { set, useForm } from "react-hook-form";
-import { Navigate, useLocation } from "react-router-dom";
-import nextId from "react-id-generator";
+import { useForm } from "react-hook-form";
+import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { Modal } from "react-bootstrap";
-import { Button } from "react-bootstrap";
 import { useEffect } from "react";
 
 const EditForm = ({ stickies, setStickies }) => {
