@@ -14,6 +14,7 @@ const StickiesBoard = ({ stickies, setStickies }) => {
   const [disabled, setDisabled] = useState(false);
   const [stickyToDelete, setStickyToDelete] = useState();
   const [yearSticky, setYearSticky] = useState();
+  const [selectedYearBtn, setSelectedYearBtn] = useState();
 
   const [months, setMonths] = useState([
     { name: "January", number: "01", used: false },
@@ -106,6 +107,10 @@ const StickiesBoard = ({ stickies, setStickies }) => {
   // ----------------- SIDE EFFECTS ----------------------------------
 
   useEffect(() => {
+    setSelectedYearBtn(true);
+  }, []);
+
+  useEffect(() => {
     const firstKey = Object.keys(stickies)[0];
 
     const newItem = {
@@ -134,7 +139,7 @@ const StickiesBoard = ({ stickies, setStickies }) => {
 
   const displayYearSticky = (e) => {
     e.preventDefault();
-
+    setSelectedYearBtn(false);
     const year = parseInt(e.target.value);
     const newObject = {
       [year]: stickies[year],
@@ -208,6 +213,7 @@ const StickiesBoard = ({ stickies, setStickies }) => {
           .map((year, i) => {
             return (
               <button
+                style={{ color: i === 0 && selectedYearBtn && "green" }}
                 className="year-btn"
                 key={i}
                 onClick={(e) => displayYearSticky(e)}
