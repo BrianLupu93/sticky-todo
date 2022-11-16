@@ -61,3 +61,29 @@ body {
 #slideRight:active {
   color: red;
 }
+
+.years-btn-container {
+  display: flex;
+  justify-content: center;
+}
+
+.year-btn {
+  text-align: center;
+  font-size: 25px;
+  color: white;
+  border: 1px solid white;
+  border-radius: 10px;
+  margin-right: 10px;
+  margin-left: 10px;
+}
+
+.year-btn:hover {
+  color: red;
+}
+
+.year-btn:active {
+  color: green;
+}
+.year-btn:focus {
+  color: green;
+}
