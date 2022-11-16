@@ -12,6 +12,12 @@ body {
   overflow-x: scroll;
 }
 
+[id^="id-"] {
+  display: flex;
+  width: 1410px;
+  overflow-x: scroll;
+}
+
 .month-title {
   color: white;
   text-align: center;

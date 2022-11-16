@@ -36,11 +36,13 @@ const StickiesBoard = ({ stickies, setStickies }) => {
 
   // Bunttons Slide
 
-  const next = () => {
-    document.querySelector(".month-container").scrollLeft += 1410;
+  const next = (i) => {
+    const monthScroll = document.getElementById(`id-${i}`);
+    monthScroll.scrollLeft += 1410;
   };
-  const prev = () => {
-    document.querySelector(".month-container").scrollLeft -= 1410;
+  const prev = (i) => {
+    const monthScroll = document.getElementById(`id-${i}`);
+    monthScroll.scrollLeft -= 1410;
   };
 
   // Return the stickies array
@@ -225,7 +227,8 @@ const StickiesBoard = ({ stickies, setStickies }) => {
             return (
               <div key={i}>
                 <h2 className="month-title">{month.name}</h2>
-                <div className="month-container">
+
+                <div className="month-container" id={`id-${i}`}>
                   {makeSticky(yearSticky)
                     .filter((sticky) => {
                       return sticky.date[3] + sticky.date[4] === month.number;
@@ -247,41 +250,42 @@ const StickiesBoard = ({ stickies, setStickies }) => {
                         />
                       );
                     })}
-
-                  <div className="scroll-btns-container">
-                    <button
-                      style={{
-                        display:
-                          makeSticky(yearSticky).filter((sticky) => {
-                            return (
-                              sticky.date[3] + sticky.date[4] === month.number
-                            );
-                          }).length > 3
-                            ? "block"
-                            : "none",
-                      }}
-                      id="slideLeft"
-                      onClick={() => prev()}
-                    >
-                      <FaAngleLeft />
-                    </button>
-                    <button
-                      style={{
-                        display:
-                          makeSticky(yearSticky).filter((sticky) => {
-                            return (
-                              sticky.date[3] + sticky.date[4] === month.number
-                            );
-                          }).length > 3
-                            ? "block"
-                            : "none",
-                      }}
-                      id="slideRight"
-                      onClick={() => next()}
-                    >
-                      <FaAngleRight />
-                    </button>
-                  </div>
+                </div>
+                <div className="scroll-btns-container">
+                  <button
+                    value={i}
+                    style={{
+                      display:
+                        makeSticky(yearSticky).filter((sticky) => {
+                          return (
+                            sticky.date[3] + sticky.date[4] === month.number
+                          );
+                        }).length > 3
+                          ? "block"
+                          : "none",
+                    }}
+                    id="slideLeft"
+                    onClick={() => prev(i)}
+                  >
+                    <FaAngleLeft />
+                  </button>
+                  <button
+                    value={i}
+                    style={{
+                      display:
+                        makeSticky(yearSticky).filter((sticky) => {
+                          return (
+                            sticky.date[3] + sticky.date[4] === month.number
+                          );
+                        }).length > 3
+                          ? "block"
+                          : "none",
+                    }}
+                    id="slideRight"
+                    onClick={() => next(i)}
+                  >
+                    <FaAngleRight />
+                  </button>
                 </div>
               </div>
             );
