@@ -92,3 +92,25 @@ body {
 .year-btn:focus {
   color: green;
 }
+
+.no-sticky {
+  margin-top: 50%;
+  text-align: center;
+  color: white;
+  animation: colorNoSticky 2s 100;
+}
+
+@keyframes colorNoSticky {
+  0% {
+    color: red;
+  }
+  25% {
+    color: yellow;
+  }
+  75% {
+    color: green;
+  }
+  100% {
+    color: rgb(169, 165, 165);
+  }
+}
