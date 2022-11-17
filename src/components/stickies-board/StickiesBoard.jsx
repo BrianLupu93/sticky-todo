@@ -113,7 +113,7 @@ const StickiesBoard = ({ stickies, setStickies }) => {
   useEffect(() => {
     let firstKey;
 
-    if (stickies) {
+    if (stickies !== undefined && stickies !== null && stickies !== {}) {
       firstKey = Object.keys(stickies)[0];
       const newItem = {
         [firstKey]: stickies[firstKey],
@@ -121,10 +121,10 @@ const StickiesBoard = ({ stickies, setStickies }) => {
 
       setYearSticky(newItem);
     }
-  }, []);
+  }, [stickies]);
 
   useEffect(() => {
-    if (yearSticky) {
+    if (yearSticky !== null && yearSticky !== undefined) {
       checkMonths(makeSticky(yearSticky));
     }
   }, [yearSticky]);
@@ -177,8 +177,18 @@ const StickiesBoard = ({ stickies, setStickies }) => {
       (sticky) => sticky.id !== id
     );
 
+    const numberOfMonths = Object.keys(stickies[year]);
+
     if (newStickies.length === 0) {
       const newMonths = [];
+
+      if (numberOfMonths.length === 1) {
+        delete stickies[year];
+
+        setStickies({ ...stickies });
+        console.log("yessss");
+        return stickies;
+      }
 
       months.filter((monthItem) => {
         if (monthItem.number === month) {
@@ -199,10 +209,11 @@ const StickiesBoard = ({ stickies, setStickies }) => {
 
     return stickies;
   };
-
+  console.log(stickies);
+  console.log(yearSticky);
   return (
     <>
-      {stickies === null || stickies === undefined ? (
+      {stickies === null || stickies === undefined || stickies === {} ? (
         <div className="stikies-board">
           <div className="to-sticky-btn">
             <button className="create-sticky" onClick={() => navigate("/")}>
@@ -241,81 +252,86 @@ const StickiesBoard = ({ stickies, setStickies }) => {
                 );
               })}
           </div>
-          <div>
-            {months
-              .filter((monthItem) => {
-                return monthItem.used === true;
-              })
-              .map((month, i) => {
-                return (
-                  <div key={i}>
-                    <h2 className="month-title">{month.name}</h2>
 
-                    <div className="month-container" id={`id-${i}`}>
-                      {makeSticky(yearSticky)
-                        .filter((sticky) => {
-                          return (
-                            sticky.date[3] + sticky.date[4] === month.number
-                          );
-                        })
-                        .map((sticky, i) => {
-                          return (
-                            <Stiky
-                              setVisible={setVisible}
-                              setStickies={setStickies}
-                              disabled={disabled}
-                              setDisabled={setDisabled}
-                              stickies={stickies}
-                              setStickyToDelete={setStickyToDelete}
-                              key={i}
-                              title={sticky.title}
-                              body={sticky.body}
-                              date={sticky.date}
-                              id={sticky.id}
-                            />
-                          );
-                        })}
+          {stickies !== undefined && stickies !== null && stickies !== {} && (
+            <div>
+              {months
+                .filter((monthItem) => {
+                  return monthItem.used === true;
+                })
+                .map((month, i) => {
+                  return (
+                    <div key={i}>
+                      <h2 className="month-title">{month.name}</h2>
+
+                      <div className="month-container" id={`id-${i}`}>
+                        {makeSticky(yearSticky)
+                          .filter((sticky) => {
+                            return (
+                              sticky.date[3] + sticky.date[4] === month.number
+                            );
+                          })
+                          .map((sticky, i) => {
+                            return (
+                              <Stiky
+                                setVisible={setVisible}
+                                setStickies={setStickies}
+                                disabled={disabled}
+                                setDisabled={setDisabled}
+                                stickies={stickies}
+                                setStickyToDelete={setStickyToDelete}
+                                key={i}
+                                title={sticky.title}
+                                body={sticky.body}
+                                date={sticky.date}
+                                id={sticky.id}
+                              />
+                            );
+                          })}
+                      </div>
+                      <div className="scroll-btns-container">
+                        <button
+                          value={i}
+                          style={{
+                            display:
+                              makeSticky(yearSticky).filter((sticky) => {
+                                return (
+                                  sticky.date[3] + sticky.date[4] ===
+                                  month.number
+                                );
+                              }).length > 3
+                                ? "block"
+                                : "none",
+                          }}
+                          id="slideLeft"
+                          onClick={() => prev(i)}
+                        >
+                          <FaAngleLeft />
+                        </button>
+                        <button
+                          value={i}
+                          style={{
+                            display:
+                              makeSticky(yearSticky).filter((sticky) => {
+                                return (
+                                  sticky.date[3] + sticky.date[4] ===
+                                  month.number
+                                );
+                              }).length > 3
+                                ? "block"
+                                : "none",
+                          }}
+                          id="slideRight"
+                          onClick={() => next(i)}
+                        >
+                          <FaAngleRight />
+                        </button>
+                      </div>
                     </div>
-                    <div className="scroll-btns-container">
-                      <button
-                        value={i}
-                        style={{
-                          display:
-                            makeSticky(yearSticky).filter((sticky) => {
-                              return (
-                                sticky.date[3] + sticky.date[4] === month.number
-                              );
-                            }).length > 3
-                              ? "block"
-                              : "none",
-                        }}
-                        id="slideLeft"
-                        onClick={() => prev(i)}
-                      >
-                        <FaAngleLeft />
-                      </button>
-                      <button
-                        value={i}
-                        style={{
-                          display:
-                            makeSticky(yearSticky).filter((sticky) => {
-                              return (
-                                sticky.date[3] + sticky.date[4] === month.number
-                              );
-                            }).length > 3
-                              ? "block"
-                              : "none",
-                        }}
-                        id="slideRight"
-                        onClick={() => next(i)}
-                      >
-                        <FaAngleRight />
-                      </button>
-                    </div>
-                  </div>
-                );
-              })}
-          </div>
+                  );
+                })}
+            </div>
+          )}
 
           <div style={{ display: !visible ? "none" : "block" }}>
             <Modal yes={sureYes} no={sureNo} />
