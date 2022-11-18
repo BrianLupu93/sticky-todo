@@ -27,6 +27,7 @@ function App() {
     <BrowserRouter basename="{process.env.PUBLIC_URL}">
       <Routes>
         <Route
+          exact
           path="/"
           element={
             <Home
