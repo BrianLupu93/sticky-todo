@@ -24,10 +24,9 @@ function App() {
   useEffect(() => {}, [stickies]);
 
   return (
-    <BrowserRouter basename="{process.env.PUBLIC_URL}">
+    <BrowserRouter>
       <Routes>
         <Route
-          exact
           path="/"
           element={
             <Home
