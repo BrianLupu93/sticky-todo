@@ -1,14 +1,14 @@
 {
-  "main.css": "/static/css/main.39eb1e63.chunk.css",
-  "main.js": "/static/js/main.9cd154d8.chunk.js",
-  "main.js.map": "/static/js/main.9cd154d8.chunk.js.map",
-  "static/js/1.905ac81d.chunk.js": "/static/js/1.905ac81d.chunk.js",
-  "static/js/1.905ac81d.chunk.js.map": "/static/js/1.905ac81d.chunk.js.map",
-  "runtime~main.js": "/static/js/runtime~main.229c360f.js",
-  "runtime~main.js.map": "/static/js/runtime~main.229c360f.js.map",
-  "static/media/Sticky.css": "/static/media/stickyNote.8d82df47.png",
-  "static/css/main.39eb1e63.chunk.css.map": "/static/css/main.39eb1e63.chunk.css.map",
-  "index.html": "/index.html",
-  "precache-manifest.a9f27b96f96322d8783bd87ae9a17cfa.js": "/precache-manifest.a9f27b96f96322d8783bd87ae9a17cfa.js",
-  "service-worker.js": "/service-worker.js"
+  "main.css": "/sticky-todo/static/css/main.9f963516.chunk.css",
+  "main.js": "/sticky-todo/static/js/main.e8050976.chunk.js",
+  "main.js.map": "/sticky-todo/static/js/main.e8050976.chunk.js.map",
+  "static/js/1.905ac81d.chunk.js": "/sticky-todo/static/js/1.905ac81d.chunk.js",
+  "static/js/1.905ac81d.chunk.js.map": "/sticky-todo/static/js/1.905ac81d.chunk.js.map",
+  "runtime~main.js": "/sticky-todo/static/js/runtime~main.aba30bea.js",
+  "runtime~main.js.map": "/sticky-todo/static/js/runtime~main.aba30bea.js.map",
+  "static/media/Sticky.css": "/sticky-todo/static/media/stickyNote.8d82df47.png",
+  "static/css/main.9f963516.chunk.css.map": "/sticky-todo/static/css/main.9f963516.chunk.css.map",
+  "index.html": "/sticky-todo/index.html",
+  "precache-manifest.52d053dcfce9734712946dc05b59bf7d.js": "/sticky-todo/precache-manifest.52d053dcfce9734712946dc05b59bf7d.js",
+  "service-worker.js": "/sticky-todo/service-worker.js"
 }
