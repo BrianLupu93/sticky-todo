@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import "./App.css";
 import { useState } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { HashRouter, Routes, Route } from "react-router-dom";
 import Home from "./components/home/Home";
 import StickiesBoard from "./components/stickies-board/StickiesBoard";
 import EditForm from "./components/edit-form/EditForm";
@@ -24,7 +24,7 @@ function App() {
   useEffect(() => {}, [stickies]);
 
   return (
-    <BrowserRouter>
+    <HashRouter>
       <Routes>
         <Route
           path="/"
@@ -50,7 +50,7 @@ function App() {
           element={<EditForm stickies={stickies} setStickies={setStickies} />}
         />
       </Routes>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
 
