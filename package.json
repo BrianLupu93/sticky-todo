@@ -1,4 +1,5 @@
 {
+  "hompage": "https://BrianLupu93.github.io/sticky-todo",
   "name": "sticky-todo",
   "version": "0.1.0",
   "private": true,
@@ -20,11 +21,10 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "dev": "NODE_OPTIONS= next dev",
     "start": "react-scripts  start",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "build": "NODE_OPTIONS= next build && next export react-scripts"
+    "build": "react-scripts build"
   },
   "eslintConfig": {
     "extends": [
